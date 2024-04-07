@@ -4,7 +4,7 @@ import { Form } from "./form";
 
 const OrganizationIdPage = async () => {
 
-    const boards = await db.board.findMany()
+    const boards = await db.board.findMany();
 
     return(
         <div className="flex flex-col space-y-4">
