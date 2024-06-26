@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  frontend:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    develop:
+      watch:
+        - path: ./package.json
+          action: rebuild 
+        - path: ./next.config.js
+          action: rebuild
+        - path: ./package-lock.json
+          action: rebuild
+        - path: .
+          target: /app
+          action: sync
+    environment:
+      - NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_cGlja2VkLWJvbmVmaXNoLTYwLmNsZXJrLmFjY291bnRzLmRldiQ
+      - CLERK_SECRET_KEY=sk_test_vY9F6Pa0DbKSPIY6VP3BXBhUbUwENd87dUFyHq7Fro
+
+      - NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+      - NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+      - NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/
+      - NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
+
+      # This was inserted by `prisma init`:
+      # Environment variables declared in this file are automatically made available to Prisma.
+      # See the documentation for more detail: https://pris.ly/d/prisma-schema#accessing-environment-variables-from-the-schema
+
+      # Prisma supports the native connection string format for PostgreSQL, MySQL, SQLite, SQL Server, MongoDB and CockroachDB.
+      # See the documentation for all the connection string options: https://pris.ly/d/connection-strings
+
+      - POSTGRES_URL="postgres://default:tA9eVuPjlL4I@ep-solitary-wave-a49xacin-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require"
+      - POSTGRES_PRISMA_URL="postgres://default:tA9eVuPjlL4I@ep-solitary-wave-a49xacin-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require&pgbouncer=true&connect_timeout=15"
+      - POSTGRES_URL_NO_SSL="postgres://default:tA9eVuPjlL4I@ep-solitary-wave-a49xacin-pooler.us-east-1.aws.neon.tech:5432/verceldb"
+      - POSTGRES_URL_NON_POOLING="postgres://default:tA9eVuPjlL4I@ep-solitary-wave-a49xacin.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require"
+      - POSTGRES_USER="default"
+      - POSTGRES_HOST="ep-solitary-wave-a49xacin-pooler.us-east-1.aws.neon.tech"
+      - POSTGRES_PASSWORD="tA9eVuPjlL4I"
+      - POSTGRES_DATABASE="verceldb"
+
+
+      - DATABASE_URL="postgresql://johndoe:randompassword@localhost:5432/mydb?schema=public"
+
+      - NEXT_PUBLIC_UNSPLASH_ACCESS_KEY = HuRfoeLKmDBZloYM-WmcbDy7kcJekoR_k2NSPwfpwSs
+
+volumes:
+  tasked:
